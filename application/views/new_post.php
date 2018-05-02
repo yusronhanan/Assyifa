@@ -69,6 +69,18 @@
             
 
             <br>
+            <div class="control-group pull-right">
+              <div class="form-group">
+                <div class="checkbox">
+  <label>
+    <input type="checkbox" data-toggle="toggle" id="publish" name="publish" value="yes">
+    Publish post ini
+  </label>
+</div>
+
+              </div>
+            </div>
+            <br>
             <div id="success"></div>
 
             <div class="form-group">

@@ -17,6 +17,15 @@ class Home extends CI_Controller {
 		];
 		$this->load->view('layout', $data);
 	}
+	public function author($id)
+	{
+
+		$data =[
+			'main' => 'beranda',
+			'post'	   => $this->post_model->get_listpost_by_author($id),
+		];
+		$this->load->view('layout', $data);
+	}
 
 
 	public function pesantren(){
@@ -79,6 +88,30 @@ class Home extends CI_Controller {
 
 		$data =[
 			'main' => 'new_post',
+		];
+		$this->load->view('layout', $data);
+	}
+        else{
+            $this->session->set_flashdata('type_notif', 'danger');
+            $this->session->set_flashdata('notif', 'Maaf, anda tidak punya akses menuju laman tersebut');
+            redirect('');
+        }
+	}
+        else{
+            $this->session->set_flashdata('type_notif', 'danger');
+            $this->session->set_flashdata('notif', 'Maaf, anda harus login terlebih dahulu');
+            redirect('login');
+        }
+	}
+	public function editpost($hash_p){
+		if ($this->session->userdata('logged_in') == true) {
+			if ($this->session->userdata('role') != 'user') {
+
+
+		$data =[
+			'main' => 'edit_post',
+			'p'	   => $this->post_model->get_post_per_code($hash_p),
+			'q'    => $this->post_model->get_q_data($hash_p),
 		];
 		$this->load->view('layout', $data);
 	}

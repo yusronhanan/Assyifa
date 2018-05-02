@@ -21,7 +21,8 @@
     <link href="<?php echo base_url() ?>assets/css/clean-blog.min.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/css/sweetalert.css" rel="stylesheet">
     
-
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7.1.0/dist/promise.min.js"></script>
 <script src="<?php echo base_url() ?>assets/js/sweetalert-dev.js"></script>
@@ -73,7 +74,7 @@ if (!empty($notif)) {
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url() ?>">Beranda</a>
+              <a class="nav-link" href="<?php echo base_url() ?>">Beranda <?php echo $this->session->userdata('role'); ?></a>
             </li>
             <?php  if ($this->session->userdata('role')=='user' || $this->session->userdata('role')=='admin') { ?>
             <li class="nav-item">

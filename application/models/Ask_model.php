@@ -36,11 +36,16 @@ class Ask_model extends CI_Model {
     
 	}
 	public function answering_in($hash_q){
+
 		date_default_timezone_set('Asia/Jakarta');
 		$now = date('Y-m-d');
 		// $now = date('Y-m-d H:i:s');
 		$hash_code= random_string('alnum',11);
         $type = $this->input->post('type_answering');
+         $publish = $this->input->post('publish');
+        if ($publish != 'yes') {
+            $publish = 'no';
+        }
         if (!empty($type)) {
         	$type_answering = $type;
         }
@@ -55,6 +60,7 @@ class Ask_model extends CI_Model {
             'desc_post'  => $this->input->post('desc_post'),
             'date_post'  => $now,
             'status_q'   => $type_answering,
+            'publish'    => $publish,
             'hash_post'  => $hash_code,
             'title_post' =>$this->input->post('title_post'),
 
@@ -71,6 +77,7 @@ class Ask_model extends CI_Model {
             return FALSE;
         }
 	}
+
 	public function get_myquestion(){
 		return $this->db->where('id_questioner',$this->session->userdata('logged_id'))
 						->join('post', 'post.question_id = question.id_question', 'left')

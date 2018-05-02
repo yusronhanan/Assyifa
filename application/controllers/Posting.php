@@ -45,6 +45,37 @@ class Posting extends CI_Controller {
         }
         
 	}
+    public function editposting($hash_p){
+         if ($this->session->userdata('logged_in') == true) {
+            
+               $this->form_validation->set_rules('text_post', 'Form Jawaban', 'required');
+               $this->form_validation->set_rules('title_post', 'Judul Post', 'required');
+               $this->form_validation->set_rules('desc_post', 'Deskripsi Post', 'required');
+               
+                if ($this->form_validation->run() == TRUE ) {
+                    if ($this->post_model->post_edit($hash_p) == TRUE) {
+                        $this->session->set_flashdata('type_notif', 'success');
+                        $this->session->set_flashdata('notif', 'Anda berhasil edit post');
+                        redirect('editpost/'.$hash_p);
+                    } else {
+
+                        $this->session->set_flashdata('type_notif', 'danger');
+                        $this->session->set_flashdata('notif', 'Maaf, anda gagal edit post. Coba lagi');
+                        redirect('editpost/'.$hash_p);
+                    }
+                } else {
+                    $this->session->set_flashdata('type_notif', 'danger');
+                $this->session->set_flashdata('notif', validation_errors());
+                        redirect('editpost/'.$hash_p);
+                  
+                }
+        }
+        else{
+            $this->session->set_flashdata('type_notif', 'danger');
+            $this->session->set_flashdata('notif', 'Maaf, anda harus login terlebih dahulu');
+            redirect('login');
+        }
+    }
 
 }
 

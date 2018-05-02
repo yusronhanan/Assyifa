@@ -26,7 +26,7 @@ class User_model extends CI_Model{
             $data['modified']= date("Y-m-d H:i:s");
             $data['role']= 'user';
             $data['hash_code']= random_string('alnum',11);
-            
+            $this->session->set_userdata('role','user');
             $insert = $this->db->insert($this->tableName,$data);
             $userID = $this->db->insert_id();
         }

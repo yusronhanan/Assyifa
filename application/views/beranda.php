@@ -53,20 +53,38 @@
             foreach ($post as $p) {
            ?>
           <div class="post-preview">
-            <a href="close.html">  <p class="post-question pull-right"><i class="fa fa-close"></i></p></a> 
+            <?php 
+            if ($p->id_user == $this->session->userdata('logged_id') && $this->session->userdata('role') != 'user') {
+             ?>
+            <a href="<?php echo base_url().'editpost/'.$p->hash_post ?>">  <p class="post-question pull-right"><i class="fa fa-pencil"></i></p></a>
+            <?php } ?> 
             <a href="<?php echo base_url().'post/'.$p->hash_post ?>">
               <h2 class="post-title">
                 <?php echo $p->title_post ?>
               </h2>
               <?php if ($p->question_id != '0') { ?>
-              <p class="post-question">Pertanyaan dari <?php echo $p->name_questioner ?></p>
+              <p class="post-question">Pertanyaan dari  <?php 
+              if ($p->type_question == 'anonim') {
+                echo 'Anonim';
+              }
+              else{
+              echo $p->name_questioner; 
+              }
+              ?></p>
               <?php } ?>
               <h3 class="post-subtitle">
                 <?php echo substr($p->desc_post, 0,30);  ?>
               </h3>
             </a>
-            <p class="post-meta">Tag <a href="a.html"><span class="badge">Sukses</span></a> <span class="badge">Taat</span></a> , Posted by
-              <a href="#"><?php echo $p->name_answering ?></a>
+            <p class="post-meta">Tag 
+              <?php 
+              $tag = explode(',', $p->tag);
+              for($i=0;$i<count($tag);$i++) {
+               ?>
+              <a href="<?php echo base_url().'tag/'.$tag[$i]; ?>"><span class="badge"><?php echo $tag[$i] ?></span></a>
+              <?php } ?>
+               , Posted by
+              <a href="<?php echo base_url().'author/'.$p->id_user; ?>"><?php echo $p->name_answering ?></a>
               on <?php echo $p->date_post ?></p>
           </div>
           <hr>

@@ -40,7 +40,13 @@
 
 
             <p class="tag-post">
-             Tag <a href="a.html"><span class="badge">Sukses</span></a> <span class="badge">Taat</span></a>
+             Tag 
+             <?php 
+              $tag = explode(',', $p->tag);
+              for($i=0;$i<count($tag);$i++) {
+               ?>
+              <a href="<?php echo base_url().'tag/'.$tag[$i]; ?>"><span class="badge"><?php echo $tag[$i] ?></span></a>
+              <?php } ?>
             </p>
           </div>
         </div>
