@@ -66,14 +66,30 @@ class Post_model extends CI_Model {
 		if ($publish != 'yes') {
 			$publish = 'no';
 		}
+		$tags = '';
+        $tag = array();
+		$tag = $this->input->post('tags');
+		for($i=0;$i<count($tag);$i++){
+		if ($i == 0) {
+		$tags .= $tag[$i];	
+		}
+		else{
+			$tags .=','.$tag[$i];
+		}
+		}
+		if ($tags == '') {
+			$tags = NULL;
+		}
         $query = $this->db->insert('post', array(
             'id_user'    => $this->session->userdata('logged_id'),
             'text_post'  => $this->input->post('text_post'),
             'desc_post'  => $this->input->post('desc_post'),
+            'question_id'=> NULL,
             'date_post'  => $now,
             'hash_post'  => $hash_code,
             'publish'	 => $publish,
             'title_post' =>$this->input->post('title_post'),
+            'tag'		 => $tags,
         ));
 
         if ($this->db->affected_rows() > 0) {
@@ -107,7 +123,20 @@ if ($this->db->affected_rows() > 0) {
         else{
         	$type_answering = 'show_q';
         }
-
+        $tags = '';
+        $tag = array();
+		$tag = $this->input->post('tags');
+		for($i=0;$i<count($tag);$i++){
+		if ($i == 0) {
+		$tags .= $tag[$i];	
+		}
+		else{
+			$tags .=','.$tag[$i];
+		}
+		}
+		if ($tags == '') {
+			$tags = NULL;
+		}
 			$query = $this->db->where('hash_post',$hash_p)->update('post', array(
             'text_post'  => $this->input->post('text_post'),
             'desc_post'  => $this->input->post('desc_post'),
@@ -115,6 +144,7 @@ if ($this->db->affected_rows() > 0) {
             'status_q'   => $type_answering,
             'publish'	 => $publish,
             'title_post' =>$this->input->post('title_post'),
+            'tag'		 => $tags,
         ));
 		}
 		else{
@@ -124,6 +154,7 @@ if ($this->db->affected_rows() > 0) {
             'date_post'  => $now,
             'publish'	 => $publish,
             'title_post' =>$this->input->post('title_post'),
+            'tag'		 => $tags,
         ));
 		}
         

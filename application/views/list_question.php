@@ -44,7 +44,7 @@
           <div class="post-preview">
             
              <p class="post-question pull-right">
-             <a href="<?php echo base_url().'deletequestion/'.$q->hash_question ?>" onclick="return confirm('Apakah anda benar ingin menghapus pesan ini?')"><i class="fa fa-trash"></i></a>
+             <a href="<?php echo base_url().'deletequestion/'.$q->hash_question ?>" onclick="return confirm('Apakah anda benar ingin menghapus pertanyaan ini?')"><i class="fa fa-trash"></i></a>
             </p>
             
 

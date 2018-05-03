@@ -23,8 +23,16 @@
           if (!empty($q)) { ?>
           <div class="post-preview">
              
-            <a href="close.html">  <p class="post-question pull-right"><i class="fa fa-close"></i></p></a>
-            <a >
+             <?php 
+            if ($this->session->userdata('role') == 'ustad'|| $this->session->userdata('role') == 'admin') {
+             ?>
+             <p class="post-question pull-right">
+             <a href="<?php echo base_url().'deletequestion/'.$q->hash_question ?>" onclick="return confirm('Apakah anda benar ingin menghapus pesan ini?')"><i class="fa fa-trash"></i></a>
+            </p>
+            
+
+            
+            <?php } ?> 
              
               <h3 class="post-subtitle" style="color:#0085a1">
                 <?php echo $q->text_question ?>
@@ -101,6 +109,20 @@
               </div>
             </div>
 
+            <br>
+            <div class="control-group">
+              <div class="form-group">
+                <div class="checkbox">
+                  Tags :
+                  <?php foreach ($tags as $t) { ?>
+  <label>
+    <input class="tagss" type="checkbox" data-toggle="toggle" name="tags[]" value="<?php echo $t->text ?>"> <?php echo $t->text ?>
+  </label>
+  <?php } ?>
+</div>
+
+              </div>
+            </div>
             <br>
                <div class="control-group pull-right">
               <div class="form-group">

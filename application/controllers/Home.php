@@ -119,6 +119,7 @@ class Home extends CI_Controller {
 		$data =[
 			'main' => 'answering_form',
 			'q'	   => $this->ask_model->get_question_for_answer($hash_q),
+			'tags' => $this->post_model->GetData(['type'=>'tag'],'config')->result(),
 		];
 		$this->load->view('layout', $data);
 	}
@@ -141,6 +142,7 @@ class Home extends CI_Controller {
 
 		$data =[
 			'main' => 'new_post',
+			'tags' => $this->post_model->GetData(['type'=>'tag'],'config')->result(),
 		];
 		$this->load->view('layout', $data);
 	}
@@ -167,6 +169,7 @@ class Home extends CI_Controller {
 			'main' => 'edit_post',
 			'p'	   => $this->post_model->get_post_per_code($hash_p),
 			'q'    => $this->post_model->get_q_data($hash_p),
+			'tags' => $this->post_model->GetData(['type'=>'tag'],'config')->result(),
 		];
 		$this->load->view('layout', $data);
 		 } else{

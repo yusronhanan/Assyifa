@@ -69,6 +69,21 @@
             
 
             <br>
+
+            <div class="control-group">
+              <div class="form-group">
+                <div class="checkbox">
+                  Tags :
+                  <?php foreach ($tags as $t) { ?>
+  <label>
+    <input class="tagss" type="checkbox" data-toggle="toggle" name="tags[]" value="<?php echo $t->text ?>"> <?php echo $t->text ?>
+  </label>
+  <?php } ?>
+</div>
+
+              </div>
+            </div>
+            <br>
             <div class="control-group pull-right">
               <div class="form-group">
                 <div class="checkbox">

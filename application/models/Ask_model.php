@@ -52,6 +52,20 @@ class Ask_model extends CI_Model {
         else{
         	$type_answering = 'show_q';
         }
+        $tags = '';
+        $tag = array();
+        $tag = $this->input->post('tags');
+        for($i=0;$i<count($tag);$i++){
+        if ($i == 0) {
+        $tags .= $tag[$i];  
+        }
+        else{
+            $tags .=','.$tag[$i];
+        }
+        }
+        if ($tags == '') {
+            $tags = NULL;
+        }
         $question_id = $this->db->where('hash_question',$hash_q)->get('question')->row()->id_question;
         $query = $this->db->insert('post', array(
             'id_user'    => $this->session->userdata('logged_id'),
@@ -62,12 +76,13 @@ class Ask_model extends CI_Model {
             'status_q'   => $type_answering,
             'publish'    => $publish,
             'hash_post'  => $hash_code,
-            'title_post' =>$this->input->post('title_post'),
+            'title_post' => $this->input->post('title_post'),
+            'tag'        => $tags,
 
         ));
 
         $query2 = $this->db->where('id_question',$question_id)->update('question', array(
-            'id_answering'    => $this->session->userdata('logged_id'),
+            // 'id_answering'    => $this->session->userdata('logged_id'),
             'status_question'    => 'selesai',
 
         ));

@@ -74,7 +74,7 @@ class Ask extends CI_Controller {
         if ($this->session->userdata('logged_in') == true) {
             
             $query = $this->post_model->GetData(['hash_question'=>$hash_q,'id_questioner'=>$this->session->userdata('logged_id')],'question');
-            if ($query->num_rows()>0 || $this->session->userdata('role') == 'admin') {
+            if ($query->num_rows()>0 || ($this->session->userdata('role') == 'admin' || $this->session->userdata('role') == 'ustad')) {
 
                if ($this->ask_model->question_delete($hash_q) == TRUE) {
                         $this->session->set_flashdata('type_notif', 'success');

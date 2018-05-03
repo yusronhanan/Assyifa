@@ -114,7 +114,26 @@
 
               </div>
             </div>
+            <div class="control-group">
+              <div class="form-group">
+                <div class="checkbox">
+                  Tags :
+                  <?php 
+                  $tags_c = explode(',', $p->tag);
+                  foreach ($tags as $t) { ?>
+  <label>
+    <input class="tagss" type="checkbox" data-toggle="toggle" id="<?php echo $t->text ?>" name="tags[]" value="<?php echo $t->text ?>"> <?php echo $t->text ?>
+  </label>
+<?php if (in_array($t->text,$tags_c)) {?>
+  <script type="text/javascript">
+              document.getElementById('<?php echo $t->text ?>').checked = true;
+             </script>
+  <?php } } ?>
+</div>
 
+              </div>
+            </div>
+            <br>
             <div class="control-group pull-right">
               <div class="form-group">
                 <div class="checkbox">

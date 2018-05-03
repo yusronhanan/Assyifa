@@ -43,16 +43,17 @@
                 <?php } ?>
            <?php echo $p->text_post ?>
 
-
+           <?php if (!empty($p->tag) || $p->tag != '') {?>
             <p class="tag-post">
              Tag 
              <?php 
               $tag = explode(',', $p->tag);
               for($i=0;$i<count($tag);$i++) {
                ?>
-              <a href="<?php echo base_url().'tag/'.$tag[$i]; ?>"><span class="badge"><?php echo $tag[$i] ?></span></a>
+              <a href="<?php echo base_url().'?tag='.$tag[$i]; ?>"><span class="badge"><?php echo $tag[$i] ?></span></a>
               <?php } ?>
             </p>
+            <?php } ?>
              <?php 
               if (($p->id_user == $this->session->userdata('logged_id') && $this->session->userdata('role') != 'user') || $this->session->userdata('role') == 'admin') {
                ?>
