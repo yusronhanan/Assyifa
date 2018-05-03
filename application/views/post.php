@@ -10,12 +10,17 @@
                <span class="meta">
                 
             <?php if (!empty($q)) {?>
-             Menjawab pertanyaan dari <?php echo $q->name_questioner ?>
+             Menjawab pertanyaan dari <?php if ($q->type_question == 'anonim') {
+                echo 'Anonim';
+              }
+              else{
+              echo $q->name_questioner; 
+              } ?>
                 <br>
                 <br>
                 <?php } ?>
                 Posted by
-                <a href="#"><?php echo $p->name_answering ?></a>
+                <a href="<?php echo base_url().'?author='.$p->hash_code; ?>"><?php echo $p->name_answering ?></a>
                 on <?php echo $p->date_post ?></span>
             
             </div>
@@ -48,6 +53,15 @@
               <a href="<?php echo base_url().'tag/'.$tag[$i]; ?>"><span class="badge"><?php echo $tag[$i] ?></span></a>
               <?php } ?>
             </p>
+             <?php 
+              if (($p->id_user == $this->session->userdata('logged_id') && $this->session->userdata('role') != 'user') || $this->session->userdata('role') == 'admin') {
+               ?>
+            <p class="tag-post float-right">
+            
+               <a href="<?php echo base_url().'deletepost/'.$p->hash_post ?>" onclick="return confirm('Apakah anda benar ingin menghapus pesan ini?')"><i class="fa fa-trash"></i></a>
+            <a href="<?php echo base_url().'editpost/'.$p->hash_post ?>"><i class="fa fa-pencil"></i></a>
+             
+            </p> <?php } ?>
           </div>
         </div>
       </div>

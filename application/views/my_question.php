@@ -43,10 +43,18 @@
           if (!empty($my_q)) {
           foreach ($my_q as $q) { ?>
           <div class="post-preview">
+            <?php 
+            if (($q->id_questioner == $this->session->userdata('logged_id') && $this->session->userdata('role') != 'ustad') || $this->session->userdata('role') == 'admin') {
+             ?>
+             <p class="post-question pull-right">
+             <a href="<?php echo base_url().'deletequestion/'.$q->hash_question ?>" onclick="return confirm('Apakah anda benar ingin menghapus pesan ini?')"><i class="fa fa-trash"></i></a>
+            </p>
             
+
+            
+            <?php } ?> 
               
-               <a href="close.html">  <p class="post-question pull-right"><i class="fa fa-close"></i></p></a> 
-                <?php if ($q->status_question == 'selesai') {
+               <?php if ($q->status_question == 'selesai') {
               echo '<a href="'.base_url().'post/'.$q->hash_post.'" target="_blank">';
             }
             else{

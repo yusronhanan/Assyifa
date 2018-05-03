@@ -58,12 +58,12 @@ $route['pesantren'] = 'home/pesantren';
 $route['newpost'] = "home/newpost";
 
 $route['editpost/(.+)'] = "home/editpost/$1";
-
-$route['author/(.+)'] = "home/author/$1";
+$route['deletepost/(.+)'] = "posting/deletepost/$1";
 $route['post/(.+)'] = 'home/post/$1';
 $route['menjawab/(.+)'] = "home/menjawab/$1";
 // $route['post'] = 'home/post';
 // $route['menjawab'] = "home/menjawab";
+$route['deletequestion/(.+)'] = "ask/deletequestion/$1";
 
 
 $route['login'] = 'auth/login';

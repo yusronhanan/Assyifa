@@ -130,13 +130,22 @@
         <?php } ?>
 
               </div>
+             <?php 
+              if (($p->id_user == $this->session->userdata('logged_id') && $this->session->userdata('role') != 'user') || $this->session->userdata('role') == 'admin') {
+               ?>
+            <p class="tag-post float-right">
+            
+               <a href="<?php echo base_url().'deletepost/'.$p->hash_post ?>" onclick="return confirm('Apakah anda benar ingin menghapus pesan ini?')"><i class="fa fa-trash"></i></a>
+           
+             
+            </p> <?php } ?>
             </div>
 
             <br>
             <div id="success"></div>
 
             <div class="form-group">
-              <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+              <button type="submit" class="btn btn-primary" id="sendMessageButton">Save</button>
             </div>
 
           </form>

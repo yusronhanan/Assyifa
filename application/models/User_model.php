@@ -15,9 +15,9 @@ class User_model extends CI_Model{
         
         if($check > 0){
             $result = $query->row_array();
-            $data['modified'] = date("Y-m-d H:i:s");
-            $update = $this->db->update($this->tableName,$data,array('id_user'=>$result['id_user']));
-            $this->session->set_userdata('role',$result['role']);
+            // $data['modified'] = date("Y-m-d H:i:s");
+            // $update = $this->db->update($this->tableName,$data,array('id_user'=>$result['id_user']));
+            // $this->session->set_userdata('role',$result['role']);
             $userID = $result['id_user'];
         }else{
             

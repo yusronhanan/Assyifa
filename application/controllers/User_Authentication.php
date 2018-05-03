@@ -9,6 +9,7 @@ class User_Authentication extends CI_Controller
         
         //load user model
         $this->load->model('user_model');
+        $this->load->model('auth_model');
 
     }
     
@@ -45,6 +46,7 @@ class User_Authentication extends CI_Controller
             if ($pass_ada != '') {
             $this->session->set_userdata('logged_in', true);
             $this->session->set_userdata($userData);     
+            $this->session->set_userdata('role',$this->auth_model->GetUser(['email'=>$gpInfo['email']])->row()->role);
             
              } 
              else{
@@ -61,6 +63,7 @@ class User_Authentication extends CI_Controller
             else{
                  $this->session->set_flashdata('type_notif', 'success');
                         $this->session->set_flashdata('notif', 'Anda berhasil login');
+                        $this->session->set_userdata('role',$this->auth_model->GetUser(['email'=>$gpInfo['email']])->row()->role);
                 redirect('');
             }
             
@@ -105,7 +108,7 @@ class User_Authentication extends CI_Controller
             if ($pass_ada != '') {
             $this->session->set_userdata('logged_in', true);
             $this->session->set_userdata($userData);     
-            
+            $this->session->set_userdata('role',$this->auth_model->GetUser(['email'=>$gpInfo['email']])->row()->role);
              } 
              else{
             $this->session->set_userdata('pass_need', true);

@@ -70,6 +70,52 @@ class Ask extends CI_Controller {
         }
         
     }
+    public function deletequestion($hash_q){
+        if ($this->session->userdata('logged_in') == true) {
+            
+            $query = $this->post_model->GetData(['hash_question'=>$hash_q,'id_questioner'=>$this->session->userdata('logged_id')],'question');
+            if ($query->num_rows()>0 || $this->session->userdata('role') == 'admin') {
+
+               if ($this->ask_model->question_delete($hash_q) == TRUE) {
+                        $this->session->set_flashdata('type_notif', 'success');
+                        $this->session->set_flashdata('notif', 'Anda berhasil menghapus pertanyaan');
+                        if ($this->session->userdata('role') != 'user') {
+                         
+                        redirect('pertanyaan');
+                        }
+                        else{
+                           redirect('pertanyaanku');
+                        }
+                    } else {
+
+                        $this->session->set_flashdata('type_notif', 'danger');
+                        $this->session->set_flashdata('notif', 'Maaf, anda gagal menghapus pertanyaan. Coba lagi');
+                       if ($this->session->userdata('role') != 'user') {
+                         
+                        redirect('pertanyaan');
+                        }
+                        else{
+                           redirect('pertanyaanku');
+                        }
+                    }
+                } else{
+                    $this->session->set_flashdata('type_notif', 'danger');
+                        $this->session->set_flashdata('notif', 'Maaf, anda tidak punya akses melakukan aksi tersebut');
+                       if ($this->session->userdata('role') != 'user') {
+                         
+                        redirect('pertanyaan');
+                        }
+                        else{
+                           redirect('pertanyaanku');
+                        }
+                }
+        }
+        else{
+            $this->session->set_flashdata('type_notif', 'danger');
+            $this->session->set_flashdata('notif', 'Maaf, anda harus login terlebih dahulu');
+            redirect('login');
+        }
+    }
 
 	
 

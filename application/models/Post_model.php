@@ -6,36 +6,41 @@ class Post_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		
+		$this->load->model('auth_model');
 	}
 
-	public function get_listpost(){
+	public function get_listpost($limit,$mulai){
 		return $this->db
-					->select('*, penjawab.first_name as name_answering,penanya.first_name as name_questioner')
+					->select('*,  CONCAT(penjawab.first_name, " ", penjawab.last_name ) as name_answering,CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner, penjawab.hash_code as hash_penjawab')
 					->where('publish','yes')
 					->join('question','question.id_question = post.question_id', 'left')
 					->join('users as penanya','question.id_questioner = penanya.id_user', 'left')
 					->join('users as penjawab','post.id_user = penjawab.id_user', 'left')
 					->group_by('post.id_post')
 					->order_by('date_post','DESC')
+					->limit($limit,$mulai)
 					->get('post')
 						->result();
 	}
-	public function get_listpost_by_author($id){
+	public function get_listpost_where($limit,$mulai,$where){
 		return $this->db
-					->select('*, penjawab.first_name as name_answering,penanya.first_name as name_questioner')
-					->where('penjawab.id_user',$id)
+					->select('*,  CONCAT(penjawab.first_name, " ", penjawab.last_name ) as name_answering,CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner, penjawab.hash_code as hash_penjawab')
+					->where('publish','yes')
+					->where($where)
 					->join('question','question.id_question = post.question_id', 'left')
 					->join('users as penanya','question.id_questioner = penanya.id_user', 'left')
 					->join('users as penjawab','post.id_user = penjawab.id_user', 'left')
 					->group_by('post.id_post')
 					->order_by('date_post','DESC')
+					->limit($limit,$mulai)
 					->get('post')
 						->result();
 	}
+
+
 	public function get_post_per_code($hash_p){
 		return $this->db
-					->select('*, penjawab.first_name as name_answering')
+					->select('*, CONCAT(penjawab.first_name, " ", penjawab.last_name ) as name_answering')
 					->where('hash_post',$hash_p)
 						->join('users as penjawab','post.id_user = penjawab.id_user')
 						->get('post')
@@ -45,7 +50,7 @@ class Post_model extends CI_Model {
 	public function get_q_data($hash_p){
 		$id_q = $this->db->where('hash_post',$hash_p)->get('post')->row()->question_id;
 		return $this->db
-					->select('*, penanya.first_name as name_questioner')
+					->select('*, CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner')
 					->where('id_question',$id_q)
 						->join('users as penanya','question.id_questioner = penanya.id_user')
 						->get('question')
@@ -72,6 +77,15 @@ class Post_model extends CI_Model {
         ));
 
         if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+	}
+	public function post_delete($hash_p){
+		$query = $this->db->where('hash_post',$hash_p)->delete('post');
+           
+if ($this->db->affected_rows() > 0) {
             return TRUE;
         } else {
             return FALSE;
@@ -120,6 +134,16 @@ class Post_model extends CI_Model {
         } else {
             return FALSE;
         }
+	}
+
+	public function GetAllData($table){
+		return $this->db->get($table)->result();
+	}
+	public function GetData($where,$table){
+		return $this->db->where($where)->get($table);
+	}
+	public function GetLikeData($where,$table){
+		return $this->db->like($where)->get($table);
 	}
 
 }

@@ -15,31 +15,47 @@
  <!-- Main Content -->
     <div class="container">
       <!-- Sidebar Widgets Column -->
+        
         <div class="col-md-4">
 
           <!-- Search Widget -->
+          <?php 
+          if (!empty($this->input->get('keyword'))) {
+            $keyword = $this->input->get('keyword');
+          }else{
+            $keyword = '';
+          }
+          if (!empty($this->input->get('author'))) {
+            $author = $this->input->get('author');
+          }else{
+            $author = '';
+          }
+          if (!empty($this->input->get('tag'))) {
+            $tag = $this->input->get('tag');
+          }
+          else{
+            $tag = '';
+          }
+           ?>
+          
+          <form action="<?php echo base_url() ?>" method="get">
+                
           <div class="card my-4">
             <h5 class="card-header">Search</h5>
             <div class="card-body">
               <div class="input-group">
-
-               <!--  <select class="form-control" name="tipe_post">
-                  <option value="all">All</option>
-                  <option value="daily">Daily</option>
-                  <option value="question">Question</option>
-                
-                </select> -->
-                <!-- </div> -->
-                <!-- <br> -->
-                              <!-- <div class="input-group"> -->
-
-                <input type="text" class="form-control" placeholder="Search for...">
+                <input type="text" name="keyword" class="form-control" placeholder="Cari berdasarkan judul" value="<?php echo $keyword ?>">
+                <input type="hidden" name="author" value="<?php echo $author ?>">
+                <input type="hidden" name="tag" value="<?php echo $tag ?>">
                 <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
+                  <button class="btn btn-secondary" type="submit">Go!</button>
                 </span>
+                
               </div>
             </div>
           </div>
+
+                </form>
 
           
 
@@ -54,10 +70,17 @@
            ?>
           <div class="post-preview">
             <?php 
-            if ($p->id_user == $this->session->userdata('logged_id') && $this->session->userdata('role') != 'user') {
+            if (($p->id_user == $this->session->userdata('logged_id') && $this->session->userdata('role') != 'user') || $this->session->userdata('role') == 'admin') {
              ?>
-            <a href="<?php echo base_url().'editpost/'.$p->hash_post ?>">  <p class="post-question pull-right"><i class="fa fa-pencil"></i></p></a>
+             <p class="post-question pull-right">
+             <a href="<?php echo base_url().'deletepost/'.$p->hash_post ?>" onclick="return confirm('Apakah anda benar ingin menghapus pesan ini?')"><i class="fa fa-trash"></i></a>
+            <a href="<?php echo base_url().'editpost/'.$p->hash_post ?>"><i class="fa fa-pencil"></i></a>
+            </p>
+            
+
+            
             <?php } ?> 
+            
             <a href="<?php echo base_url().'post/'.$p->hash_post ?>">
               <h2 class="post-title">
                 <?php echo $p->title_post ?>
@@ -81,10 +104,10 @@
               $tag = explode(',', $p->tag);
               for($i=0;$i<count($tag);$i++) {
                ?>
-              <a href="<?php echo base_url().'tag/'.$tag[$i]; ?>"><span class="badge"><?php echo $tag[$i] ?></span></a>
+              <a href="<?php echo base_url().'?tag='.$tag[$i]; ?>"><span class="badge"><?php echo $tag[$i] ?></span></a>
               <?php } ?>
                , Posted by
-              <a href="<?php echo base_url().'author/'.$p->id_user; ?>"><?php echo $p->name_answering ?></a>
+              <a href="<?php echo base_url().'?author='.$p->hash_penjawab; ?>"><?php echo $p->name_answering ?></a>
               on <?php echo $p->date_post ?></p>
           </div>
           <hr>
@@ -92,7 +115,10 @@
         
           <!-- Pager -->
           <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            <!-- <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a> -->
+            <?php echo $pagination ?>
+
+
           </div>
         </div>
       </div>

@@ -42,9 +42,14 @@
           if (!empty($question)) {
           foreach ($question as $q) { ?>
           <div class="post-preview">
-             
-            <a href="close.html">  <p class="post-question pull-right"><i class="fa fa-close"></i></p></a>
-            <a href="post.html">
+            
+             <p class="post-question pull-right">
+             <a href="<?php echo base_url().'deletequestion/'.$q->hash_question ?>" onclick="return confirm('Apakah anda benar ingin menghapus pesan ini?')"><i class="fa fa-trash"></i></a>
+            </p>
+            
+
+            
+            <a >
              
               <h3 class="post-subtitle">
                 <?php echo $q->text_question ?>
@@ -63,7 +68,7 @@
               if ($q->status_question == 'proses') { ?>
               <a href="<?php echo base_url().'menjawab/'.$q->hash_question ?>" class="pull-right"><button class="btn btn-danger">Jawab</button></a>
               <?php } else{ ?>
-              <a href="<?php echo base_url().'post/'.$q->hash_question ?>" class="pull-right"><button class="btn btn-primary">Lihat</button></a>
+              <a href="<?php echo base_url().'post/'.$q->hash_post ?>" class="pull-right"><button class="btn btn-primary">Lihat</button></a>
               <?php }  ?>
             </p>
           </div>

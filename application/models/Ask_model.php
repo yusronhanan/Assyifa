@@ -87,10 +87,11 @@ class Ask_model extends CI_Model {
 	}
 	public function get_question(){
 		return $this->db
-					->select('question.*, penanya.full_name as name_questioner')
+					->select('*, CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner')
 		// , penjawab.full_name as name_answering
-						->join('user as penanya','question.id_questioner = penanya.id_user')
-						// ->join('user as penjawab','question.id_answering = penjawab.id_user')
+						->join('users as penanya','question.id_questioner = penanya.id_user')
+						->join('post', 'post.question_id = question.id_question', 'left')
+                        // ->join('user as penjawab','question.id_answering = penjawab.id_user')
 						// ->group_by('question.id_question')
 						->order_by('question.status_question','ASC')
 						->get('question')
@@ -98,12 +99,21 @@ class Ask_model extends CI_Model {
 	}
 	public function get_question_for_answer($hash_q){
 		return $this->db
-					->select('*, penanya.full_name as name_questioner')
+					->select('*, CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner')
 					->where('hash_question',$hash_q)
-						->join('user as penanya','question.id_questioner = penanya.id_user')
+						->join('users as penanya','question.id_questioner = penanya.id_user')
 						->get('question')
 						->row();
 	}
+    public function question_delete($hash_q){
+        $query = $this->db->where('hash_question',$hash_q)->delete('question');
+           
+if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 
 }
 
