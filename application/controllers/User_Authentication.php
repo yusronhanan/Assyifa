@@ -30,8 +30,8 @@ class User_Authentication extends CI_Controller
             //preparing data for database insertion
             $userData['oauth_provider'] = 'google';
             $userData['oauth_uid']      = $gpInfo['id'];
-            $userData['first_name']     = $gpInfo['given_name'];
-            $userData['last_name']      = $gpInfo['family_name'];
+            // $userData['first_name']     = $gpInfo['given_name'];
+            // $userData['last_name']      = $gpInfo['family_name'];
             $userData['email']          = $gpInfo['email'];
             $userData['gender']         = !empty($gpInfo['gender'])?$gpInfo['gender']:'';
             $userData['locale']         = !empty($gpInfo['locale'])?$gpInfo['locale']:'';
@@ -92,8 +92,8 @@ class User_Authentication extends CI_Controller
             //preparing data for database insertion
             $userData['oauth_provider'] = 'google';
             $userData['oauth_uid']      = $gpInfo['id'];
-            $userData['first_name']     = $gpInfo['given_name'];
-            $userData['last_name']      = $gpInfo['family_name'];
+            // $userData['first_name']     = $gpInfo['given_name'];
+            // $userData['last_name']      = $gpInfo['family_name'];
             $userData['email']          = $gpInfo['email'];
             $userData['gender']         = !empty($gpInfo['gender'])?$gpInfo['gender']:'';
             $userData['locale']         = !empty($gpInfo['locale'])?$gpInfo['locale']:'';
@@ -160,6 +160,11 @@ class User_Authentication extends CI_Controller
             redirect('');
         }
         else {
+            $this->form_validation->set_rules('first_name', 'First Name', 'required');
+                $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+                
+                $this->form_validation->set_rules('birthday', 'Birthday', 'required');
+                
                $this->form_validation->set_rules('password', 'Password', 'required');
                 $this->form_validation->set_rules('repassword', 'Re-Enter Password', 'required');
 
@@ -168,12 +173,12 @@ class User_Authentication extends CI_Controller
 
                     if ($this->user_model->pass_need_in() == TRUE) {
                         $this->session->set_flashdata('type_notif', 'success');
-                        $this->session->set_flashdata('notif', 'Anda berhasil setting password');
+                        $this->session->set_flashdata('notif', 'Anda berhasil melengkapi data');
                         redirect('');
                     } else {
 
                         $this->session->set_flashdata('type_notif', 'danger');
-                        $this->session->set_flashdata('notif', 'Maaf, Anda gagal setting password');
+                        $this->session->set_flashdata('notif', 'Maaf, Anda gagal melengkapi data');
                         redirect('user_authentication/pass_need');
                     }
                 }

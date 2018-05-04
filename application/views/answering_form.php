@@ -118,7 +118,7 @@
   <label>
     <input class="tagss" type="checkbox" data-toggle="toggle" name="tags[]" value="<?php echo $t->text ?>"> <?php echo $t->text ?>
   </label>
-  <?php } ?>
+  <?php } ?><a href="#" title="New Tag" data-toggle="modal" data-target="#newTag"><span class="badge"><i class="fa fa-plus"></i></span></a>
 </div>
 
               </div>
@@ -146,3 +146,28 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="newTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Tambah Tag Baru</h4>
+                                        </div>
+                                        <form action="<?php echo base_url() ?>posting/new_tag" method="post">
+                                        <div class="modal-body">
+                                            Keyword Tag
+                                            <input type="text" name="tag" placeholder="Tag" class="form-control"  required>
+                                            <br>
+                                            <input type="hidden" name="backto" value="menjawab/<?php echo $q->hash_question ?>">
+                                            <br>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="reset" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>

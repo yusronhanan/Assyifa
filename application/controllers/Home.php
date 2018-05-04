@@ -227,7 +227,9 @@ class Home extends CI_Controller {
 
 	public function pesantren(){
 		$data =[
-			'main' => 'about',
+			'main' 		   => 'about',
+			'aboutus_text' => $this->post_model->GetData(['type'=>'aboutus_text'],'config')->row()->text,
+			'aboutus_maps' => $this->post_model->GetData(['type'=>'aboutus_maps'],'config')->row()->text, 
 		];
 		$this->load->view('layout', $data);
 	}

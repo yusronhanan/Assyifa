@@ -24,17 +24,17 @@ class Posting extends CI_Controller {
                     if ($this->post_model->post_in() == TRUE) {
                         $this->session->set_flashdata('type_notif', 'success');
                         $this->session->set_flashdata('notif', 'Anda berhasil membuat post baru');
-                        redirect('pertanyaan');
+                        redirect('newpost');
                     } else {
 
                         $this->session->set_flashdata('type_notif', 'danger');
                         $this->session->set_flashdata('notif', 'Maaf, anda gagal membuat post baru. Coba lagi');
-                        redirect('pertanyaan');
+                        redirect('newpost');
                     }
                 } else {
                     $this->session->set_flashdata('type_notif', 'danger');
                 $this->session->set_flashdata('notif', validation_errors());
-                        redirect('pertanyaan');
+                        redirect('newpost');
                   
                 }
         }
@@ -45,6 +45,64 @@ class Posting extends CI_Controller {
         }
         
 	}
+    public function new_tag(){
+        if ($this->session->userdata('logged_in') == true) {
+            
+               $this->form_validation->set_rules('tag', 'Keyword Tag', 'required');
+               
+                if ($this->form_validation->run() == TRUE ) {
+                    if ($this->post_model->tag_in() == TRUE) {
+                        $this->session->set_flashdata('type_notif', 'success');
+                        $this->session->set_flashdata('notif', 'Anda berhasil menambahkan tag baru');
+
+                        redirect(''.$this->input->post('backto'));
+                    } else {
+
+                        $this->session->set_flashdata('type_notif', 'danger');
+                        $this->session->set_flashdata('notif', 'Maaf, anda gagal menambahkan tag baru. Coba lagi');
+                        redirect(''.$this->input->post('backto'));
+                    }
+                } else {
+                    $this->session->set_flashdata('type_notif', 'danger');
+                $this->session->set_flashdata('notif', validation_errors());
+                        redirect(''.$this->input->post('backto'));
+                  
+                }
+        }
+        else{
+            $this->session->set_flashdata('type_notif', 'danger');
+            $this->session->set_flashdata('notif', 'Maaf, anda harus login terlebih dahulu');
+            redirect('login');
+        }
+    }
+    public function edit_aboutus(){
+        if ($this->session->userdata('logged_in') == true) {
+            
+                // if ($this->form_validation->run() == TRUE ) {
+                    if ($this->post_model->aboutus_edit() == TRUE) {
+                        $this->session->set_flashdata('type_notif', 'success');
+                        $this->session->set_flashdata('notif', 'Anda berhasil mengedit tentang pesantren');
+
+                        redirect('pesantren');
+                    } else {
+
+                        $this->session->set_flashdata('type_notif', 'danger');
+                        $this->session->set_flashdata('notif', 'Maaf, anda gagal mengedit tentang pesantren. Coba lagi');
+                        redirect('pesantren');
+                    }
+                // } else {
+                //     $this->session->set_flashdata('type_notif', 'danger');
+                // $this->session->set_flashdata('notif', validation_errors());
+                //         redirect('pesantren');
+                  
+                // }
+        }
+        else{
+            $this->session->set_flashdata('type_notif', 'danger');
+            $this->session->set_flashdata('notif', 'Maaf, anda harus login terlebih dahulu');
+            redirect('login');
+        }
+    }
     public function editposting($hash_p){
          if ($this->session->userdata('logged_in') == true) {
             

@@ -163,6 +163,38 @@ if ($this->db->affected_rows() > 0) {
             return FALSE;
         }
 	}
+	public function tag_in(){
+
+        $query = $this->db->insert('config', array(
+            'type'    => 'tag',
+            'text'	  => $this->input->post('tag'),
+        ));
+
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+	}
+	public function aboutus_edit(){
+		if (!empty($this->input->post('aboutus_text'))) {
+			$text = $this->input->post('aboutus_text');
+			$where = array('type'=>'aboutus_text');
+		}
+		else{
+			$text = $this->input->post('aboutus_maps');
+			$where = array('type'=>'aboutus_maps');	
+		}
+		$query = $this->db->where($where)->update('config', array(
+            'text'	  => $text,
+        ));
+
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+	}
 	public function post_edit($hash_p){
 		date_default_timezone_set('Asia/Jakarta');
 		$now = date('Y-m-d');

@@ -1,4 +1,8 @@
-  <!-- Page Header -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/brands.css" integrity="sha384-Pln/erVatVEIIVh7sfyudOXs5oajCSHg7l5e2Me02e3TklmDuKEhQ8resTIwyI+w" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/fontawesome.css" integrity="sha384-rnr8fdrJ6oj4zli02To2U/e6t1qG8dvJ8yNZZPsKHcU7wFK3MGilejY5R/cUc5kf" crossorigin="anonymous"> <!-- Page Header -->
+    <?php 
+$base = base_url();
+     ?>
     <header class="masthead" style="background-image: url('<?php echo base_url() ?>assets/img/post-bg.jpg')">
       <div class="overlay"></div>
       <div class="container">
@@ -54,6 +58,34 @@
               <?php } ?>
             </p>
             <?php } ?>
+             <p >
+            Share : 
+            <br>
+            <a href="https://api.whatsapp.com/send?text=<?php echo rawurlencode ('Saya telah membaca artikel : *'.$p->title_post.'*, '.$p->desc_post.'. Silahkan menuju link '.$base.'post/'.$p->hash_post.'') ?>" target="_blank" data-action="share/whatsapp/share"> <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-whatsapp fa-stack-1x fa-inverse"></i>
+                  </span></a>
+
+                  <a href="https://twitter.com/intent/tweet?url=<?php echo $base.'post/'.$p->hash_post ?>&text=<?php echo rawurlencode ('Saya telah membaca artikel : *'.$p->title_post.'*, '.$p->desc_post.'.') ?>&via=yusron_hzvi&hashtags=ngajiyuk" target="_blank"> <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span></a>
+
+            <a href="https://plus.google.com/share?url=<?php echo $base.'post/'.$p->hash_post ?>&text=<?php echo rawurlencode ('Saya telah membaca artikel : *'.$p->title_post.'*, '.$p->desc_post.'.') ?>&hl=in" target="_blank"> <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                  </span></a>
+           
+            <a href="https://www.facebook.com/sharer.php?u=<?php echo $base.'post/'.$p->hash_post ?>" target="_blank"> <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span></a>
+
+                 
+
+                  
+            </p>
+            
              <?php 
               if (($p->id_user == $this->session->userdata('logged_id') && $this->session->userdata('role') != 'user') || $this->session->userdata('role') == 'admin') {
                ?>

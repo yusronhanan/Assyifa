@@ -37,7 +37,13 @@ class User_model extends CI_Model{
     public function pass_need_in(){
         $password = md5($this->input->post('password'));
         $email = $this->session->userdata('email');
-        $query = $this->db->where('email',$email)->update('users',['password'=>$password]);
+        $data = array(
+            'first_name' => $this->input->post('first_name'),
+            'last_name'  => $this->input->post('last_name'),
+            'birthday'   => $this->input->post('birthday'),
+            'password'   =>$password,
+        );
+        $query = $this->db->where('email',$email)->update('users',$data);
         if ($this->db->affected_rows() > 0) {
             $this->session->unset_userdata('pass_need');
             $this->session->set_userdata('logged_in',true);

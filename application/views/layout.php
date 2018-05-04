@@ -78,9 +78,9 @@ if (!empty($notif)) {
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url() ?>">Beranda <?php echo $this->session->userdata('role'); ?></a>
+              <a class="nav-link" href="<?php echo base_url() ?>">Beranda</a>
             </li>
-            <?php  if ($this->session->userdata('role')=='admin') { ?>
+            <?php  if ($this->session->userdata('role')=='user' || $this->session->userdata('role')=='admin') { ?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>bertanya">Bertanya</a>
             </li>
@@ -89,15 +89,15 @@ if (!empty($notif)) {
             </li>
             <?php  } ?>
             <?php  if ($this->session->userdata('role')=='ustad' || $this->session->userdata('role')=='admin') { ?>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>pertanyaan">Pertanyaan</a>
-            </li> -->
-            <!-- <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>newpost">New Post</a>
-            </li> -->
-            <!-- <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>postku">Postku</a>
-            </li> -->
+            </li>
             <?php  } 
           if ($this->session->userdata('role')=='admin') { 
             ?>
@@ -116,11 +116,12 @@ if (!empty($notif)) {
               <a class="nav-link" href="<?php echo base_url() ?>signup">Sign up</a>
             </li>
             <?php  }
-            else { ?>
-            <li class="nav-item">
+            else {
+             ?>
+             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>logout">Logout</a>
             </li>
-            <?php  } ?>
+             <?php } ?>
             
             
             
@@ -139,88 +140,14 @@ if (!empty($notif)) {
     <a href="<?php echo base_url() ?>pertanyaan" title="pertanyaan"><i class="zmdi zmdi-inbox"></i></a>
     <a href="<?php echo base_url() ?>newpost" title="new post"><i class="zmdi zmdi-file-plus"></i>   </a>
     <?php } else{ ?>
-    <a href="<?php echo base_url() ?>#myaccount" title="akunku"><i class="zmdi zmdi-account"></i></a>
+    <a href="<?php echo base_url() ?>logout" title="logout"><i class="fa fa-sign-out"></i></a>
     <a href="<?php echo base_url() ?>pertanyaanku" title="pertanyaanku"><i class="zmdi zmdi-format-list-bulleted"></i></a>
     <a href="<?php echo base_url() ?>bertanya" title="bertanya"><i class="zmdi zmdi-playlist-plus"></i></a>
     <?php } ?>
 </div> 
     <!-- Footer -->
     <footer>
-        <div class="col-md-12 row">
-      <div class="col-md-6 " style="float: left !important">
-        <!-- Categories Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Tag</h5>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">Fiqh</a>
-                    </li>
-                    <li>
-                      <a href="#">Aqidah</a>
-                    </li>
-                    <li>
-                      <a href="#">Taat</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">Kisah</a>
-                    </li>
-                    <li>
-                      <a href="#">Nabi dan Rasul</a>
-                    </li>
-                    <li>
-                      <a href="#">Suri Tauladan</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          
-      </div>
-      <div class="col-md-6 " style="float: right !important;">
-        <!-- Categories Widget -->
-          <div class="card my-4">
-            <h5 class="card-header">Pages</h5>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">Beranda</a>
-                    </li>
-                    <li>
-                      <a href="#">Bertanya</a>
-                    </li>
-                    <li>
-                      <a href="#">Pertanyaanku</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-lg-6">
-                  <ul class="list-unstyled mb-0">
-                    <li>
-                      <a href="#">Kumpulan Pertanyaan</a>
-                    </li>
-                    <li>
-                      <a href="#">Tentang Pesantren</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          
-      </div>
-    </div>
+        
 
     
 

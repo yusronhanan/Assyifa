@@ -65,11 +65,11 @@
 					<input type="checkbox" value="remember-me">Remember Me
 				</label> -->
 			</div>
-			<div class="col-xs-12 col-sm-3">
+			<!-- <div class="col-xs-12 col-sm-3">
 				<p class="omb_forgotPwd">
 					<a href="#">Forgot password?</a>
 				</p>
-			</div>
+			</div> -->
 		</div>	    	
 	</div>
 
