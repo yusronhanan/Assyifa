@@ -134,6 +134,7 @@ if (!empty($notif)) {
    <?php $this->load->view($main); ?>
 
     <hr>
+    <?php if ($this->session->userdata('logged_in') == true) { ?>
 <div class="menu-button"><i class="fa fa-plus"></i>
   <?php if ($this->session->userdata('role') != 'user') { ?>
     <a href="<?php echo base_url() ?>postku" title="postku"><i class="zmdi zmdi-folder-person"></i></a>
@@ -144,7 +145,8 @@ if (!empty($notif)) {
     <a href="<?php echo base_url() ?>pertanyaanku" title="pertanyaanku"><i class="zmdi zmdi-format-list-bulleted"></i></a>
     <a href="<?php echo base_url() ?>bertanya" title="bertanya"><i class="zmdi zmdi-playlist-plus"></i></a>
     <?php } ?>
-</div> 
+</div>
+ <?php } ?> 
     <!-- Footer -->
     <footer>
         

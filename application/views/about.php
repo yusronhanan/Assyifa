@@ -21,7 +21,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <?php 
-              if ($this->session->userdata('role') != 'user') {
+              if ($this->session->userdata('logged_in') == true && $this->session->userdata('role') != 'user') {
                ?>
             <p class="tag-post float-right" style="margin-bottom: 10px">
             <a href="#" data-toggle="modal" title="Edit Deskripsi Pesantren" data-target="#editAboutusText"><i class="fa fa-pencil"></i></a>
@@ -33,7 +33,7 @@
     <iframe src="<?php echo $aboutus_maps ?>" width="700" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
         </div>
-        <?php  if ($this->session->userdata('role') != 'user') {
+        <?php  if ($this->session->userdata('logged_in') == true && $this->session->userdata('role') != 'user') {
                ?> ?>
                 <p class="tag-post pull-right">
             

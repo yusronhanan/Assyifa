@@ -39,7 +39,7 @@ class Home extends CI_Controller {
 		$config['page_query_string'] = TRUE;
 		$config['base_url'] = $link;
 		$config['total_rows'] = $list_post;
-		$config['per_page'] = 2;
+		$config['per_page'] = 10;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 3;
 		$config['full_tag_open'] = '<ul class="pagination float-right">';
@@ -100,7 +100,7 @@ class Home extends CI_Controller {
 		$config['page_query_string'] = TRUE;
 		$config['base_url'] = $link;
 		$config['total_rows'] = $list_post;
-		$config['per_page'] = 2;
+		$config['per_page'] = 10;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 3;
 		$config['full_tag_open'] = '<ul class="pagination float-right">';
@@ -173,7 +173,7 @@ class Home extends CI_Controller {
 		$config['page_query_string'] = TRUE;
 		$config['base_url'] = $link;
 		$config['total_rows'] = $list_post;
-		$config['per_page'] = 2;
+		$config['per_page'] = 10;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 3;
 		$config['full_tag_open'] = '<ul class="pagination float-right">';
@@ -355,7 +355,7 @@ if (!empty($where)) {
 		$config['page_query_string'] = TRUE;
 		$config['base_url'] = $link;
 		$config['total_rows'] = $list_post;
-		$config['per_page'] = 2;
+		$config['per_page'] = 10;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 3;
 		$config['full_tag_open'] = '<ul class="pagination float-right">';
@@ -427,7 +427,7 @@ if (!empty($where)) {
 		$config['page_query_string'] = TRUE;
 		$config['base_url'] = $link;
 		$config['total_rows'] = $list_post;
-		$config['per_page'] = 2;
+		$config['per_page'] = 10;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 3;
 		$config['full_tag_open'] = '<ul class="pagination float-right">';

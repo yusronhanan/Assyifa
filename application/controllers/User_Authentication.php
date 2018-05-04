@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-class User_Authentication extends CI_Controller
+class User_authentication extends CI_Controller
 {
     function __construct(){
         parent::__construct();

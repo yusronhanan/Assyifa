@@ -69,6 +69,7 @@ $route['menjawab/(.+)'] = "home/menjawab/$1";
 $route['deletequestion/(.+)'] = "ask/deletequestion/$1";
 
 
+
 $route['login'] = 'auth/login';
 $route['signup'] = 'auth/signup';
 $route['logout'] = 'auth/logout';
