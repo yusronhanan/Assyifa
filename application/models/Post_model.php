@@ -37,7 +37,62 @@ class Post_model extends CI_Model {
 						->result();
 	}
 
-
+	public function get_listpostku($limit,$mulai){
+		return $this->db
+					->select('*,  CONCAT(penjawab.first_name, " ", penjawab.last_name ) as name_answering,CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner, penjawab.hash_code as hash_penjawab')
+					->where('penjawab.id_user',$this->session->userdata('logged_id'))
+					->join('question','question.id_question = post.question_id', 'left')
+					->join('users as penanya','question.id_questioner = penanya.id_user', 'left')
+					->join('users as penjawab','post.id_user = penjawab.id_user', 'left')
+					->group_by('post.id_post')
+					->order_by('date_post','DESC')
+					->order_by('publish','ASC')
+					->limit($limit,$mulai)
+					->get('post')
+						->result();
+	}
+	public function get_listpostku_where($limit,$mulai,$where){
+		return $this->db
+					->select('*,  CONCAT(penjawab.first_name, " ", penjawab.last_name ) as name_answering,CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner, penjawab.hash_code as hash_penjawab')
+					->where('penjawab.id_user',$this->session->userdata('logged_id'))
+					->where($where)
+					->join('question','question.id_question = post.question_id', 'left')
+					->join('users as penanya','question.id_questioner = penanya.id_user', 'left')
+					->join('users as penjawab','post.id_user = penjawab.id_user', 'left')
+					->group_by('post.id_post')
+					->order_by('date_post','DESC')
+					->order_by('publish','ASC')
+					->limit($limit,$mulai)
+					->get('post')
+						->result();
+	}
+	public function get_listpost_all($limit,$mulai){
+		return $this->db
+					->select('*,  CONCAT(penjawab.first_name, " ", penjawab.last_name ) as name_answering,CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner, penjawab.hash_code as hash_penjawab')
+					->join('question','question.id_question = post.question_id', 'left')
+					->join('users as penanya','question.id_questioner = penanya.id_user', 'left')
+					->join('users as penjawab','post.id_user = penjawab.id_user', 'left')
+					->group_by('post.id_post')
+					->order_by('date_post','DESC')
+					->order_by('publish','ASC')
+					->limit($limit,$mulai)
+					->get('post')
+						->result();
+	}
+	public function get_listpost_all_where($limit,$mulai,$where){
+		return $this->db
+					->select('*,  CONCAT(penjawab.first_name, " ", penjawab.last_name ) as name_answering,CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner, penjawab.hash_code as hash_penjawab')
+					->where($where)
+					->join('question','question.id_question = post.question_id', 'left')
+					->join('users as penanya','question.id_questioner = penanya.id_user', 'left')
+					->join('users as penjawab','post.id_user = penjawab.id_user', 'left')
+					->group_by('post.id_post')
+					->order_by('date_post','DESC')
+					->order_by('publish','ASC')
+					->limit($limit,$mulai)
+					->get('post')
+						->result();
+	}
 	public function get_post_per_code($hash_p){
 		return $this->db
 					->select('*, CONCAT(penjawab.first_name, " ", penjawab.last_name ) as name_answering')
@@ -85,6 +140,7 @@ class Post_model extends CI_Model {
             'text_post'  => $this->input->post('text_post'),
             'desc_post'  => $this->input->post('desc_post'),
             'question_id'=> NULL,
+            'status_q'   => NULL,
             'date_post'  => $now,
             'hash_post'  => $hash_code,
             'publish'	 => $publish,

@@ -25,28 +25,15 @@
           }else{
             $keyword = '';
           }
-          if (!empty($this->input->get('author'))) {
-            $author = $this->input->get('author');
-          }else{
-            $author = '';
-          }
-          if (!empty($this->input->get('tag'))) {
-            $tag = $this->input->get('tag');
-          }
-          else{
-            $tag = '';
-          }
            ?>
           
-          <form action="<?php echo base_url() ?>" method="get">
+          <form action="<?php echo base_url() ?>postku/" method="get">
                 
           <div class="card my-4">
             <h5 class="card-header">Search</h5>
             <div class="card-body">
               <div class="input-group">
                 <input type="text" name="keyword" class="form-control" placeholder="Cari berdasarkan judul" value="<?php echo $keyword ?>">
-                <input type="hidden" name="author" value="<?php echo $author ?>">
-                <input type="hidden" name="tag" value="<?php echo $tag ?>">
                 <span class="input-group-btn">
                   <button class="btn btn-secondary" type="submit">Go!</button>
                 </span>
@@ -60,6 +47,7 @@
           
 
         </div>
+        
         <!-- not main -->
 
       <div class="row">
@@ -69,17 +57,19 @@
             foreach ($post as $p) {
            ?>
           <div class="post-preview">
-            <?php 
-            if (($p->id_user == $this->session->userdata('logged_id') && $this->session->userdata('role') != 'user') || $this->session->userdata('role') == 'admin') {
+           
+              <?php 
+            if ($p->publish == 'yes') {
              ?>
+             <span class="badge">Published</span>
+            <?php } else{?>
+            <span class="badge" style="background-color: #dc3545">Draft</span>
+            <?php } ?>
              <p class="post-question pull-right">
              <a href="<?php echo base_url().'deletepost/'.$p->hash_post ?>" onclick="return confirm('Apakah anda benar ingin menghapus pesan ini?')"><i class="fa fa-trash"></i></a>
             <a href="<?php echo base_url().'editpost/'.$p->hash_post ?>"><i class="fa fa-pencil"></i></a>
             </p>
             
-
-            
-            <?php } ?> 
             
             <a href="<?php echo base_url().'post/'.$p->hash_post ?>">
               <h2 class="post-title">
@@ -103,6 +93,7 @@
                         else{
                         echo  substr($p->desc_post, 0,52).'...';
                         } ?>
+
               </h3>
             </a>
             <p class="post-meta">Tag 
@@ -112,9 +103,17 @@
                ?>
               <a href="<?php echo base_url().'?tag='.$tag[$i]; ?>"><span class="badge"><?php echo $tag[$i] ?></span></a>
               <?php } ?>
-               , Posted by
+               , Posted 
+               <?php if ($this->session->userdata('role') == 'admin') { ?>
+               by
               <a href="<?php echo base_url().'?author='.$p->hash_penjawab; ?>"><?php echo $p->name_answering ?></a>
-              on <?php echo $p->date_post ?></p>
+               <?php } ?>
+               on <?php echo $p->date_post ?> </p>
+
+            
+
+            
+            
           </div>
           <hr>
           <?php } } ?>

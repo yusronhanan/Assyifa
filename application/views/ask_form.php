@@ -18,8 +18,8 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <p>Sebelum mengajukan pertanyaan anda harus login terlebih dahulu. Silahkan menuju ke laman login atau signup.</p>
-          <p>Silahkan mengisi form ajukan pertanyaan, centang anonymous untuk menyembunyikan data diri.</p>
-          <p>Anda login sebagai <?php echo $this->session->userdata('email'); ?> , Bukan anda ? Ganti Akun</p>
+          <p>Silahkan mengisi form ajukan pertanyaan, centang 'Sebagai Anonim' untuk menyembunyikan data diri anda.</p>
+          <p>Anda login sebagai <?php echo $this->session->userdata('email'); ?></p>
           <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
           <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
           <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->

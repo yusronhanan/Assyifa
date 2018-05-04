@@ -18,8 +18,7 @@
     <link href='<?php echo base_url() ?>assets/https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
-    <link href="<?php echo base_url() ?>assets/css/clean-blog.min.css" rel="stylesheet">
-    <link href="<?php echo base_url() ?>assets/css/sweetalert.css" rel="stylesheet">
+   <link href="<?php echo base_url() ?>assets/css/sweetalert.css" rel="stylesheet">
     
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
@@ -29,7 +28,12 @@
   <script src="<?php echo base_url() ?>assets/js/sweetalert.min.js"></script>
       
  <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
-      
+
+ <link href="<?php echo base_url() ?>assets/css/clean-blog.min.css" rel="stylesheet">
+   <link href="<?php echo base_url() ?>assets/css/clean-blog.css" rel="stylesheet">
+
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/ionicons.min.css" />
+ <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/material-design-iconic-font/css/material-design-iconic-font.min.css" />
   </head>
 
   <body>
@@ -76,7 +80,7 @@ if (!empty($notif)) {
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>">Beranda <?php echo $this->session->userdata('role'); ?></a>
             </li>
-            <?php  if ($this->session->userdata('role')=='user' || $this->session->userdata('role')=='admin') { ?>
+            <?php  if ($this->session->userdata('role')=='admin') { ?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>bertanya">Bertanya</a>
             </li>
@@ -85,13 +89,22 @@ if (!empty($notif)) {
             </li>
             <?php  } ?>
             <?php  if ($this->session->userdata('role')=='ustad' || $this->session->userdata('role')=='admin') { ?>
-            <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url() ?>pertanyaan">Kumpulan Pertanyaan</a>
-            </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url() ?>pertanyaan">Pertanyaan</a>
+            </li> -->
+            <!-- <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>newpost">New Post</a>
+            </li> -->
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url() ?>postku">Postku</a>
+            </li> -->
+            <?php  } 
+          if ($this->session->userdata('role')=='admin') { 
+            ?>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url() ?>allpost">Semua Post</a>
             </li>
-            <?php  } ?>
+            <?php } ?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url() ?>pesantren">Tentang Pesantren</a>
             </li>
@@ -120,7 +133,17 @@ if (!empty($notif)) {
    <?php $this->load->view($main); ?>
 
     <hr>
-
+<div class="menu-button"><i class="fa fa-plus"></i>
+  <?php if ($this->session->userdata('role') != 'user') { ?>
+    <a href="<?php echo base_url() ?>postku" title="postku"><i class="zmdi zmdi-folder-person"></i></a>
+    <a href="<?php echo base_url() ?>pertanyaan" title="pertanyaan"><i class="zmdi zmdi-inbox"></i></a>
+    <a href="<?php echo base_url() ?>newpost" title="new post"><i class="zmdi zmdi-file-plus"></i>   </a>
+    <?php } else{ ?>
+    <a href="<?php echo base_url() ?>#myaccount" title="akunku"><i class="zmdi zmdi-account"></i></a>
+    <a href="<?php echo base_url() ?>pertanyaanku" title="pertanyaanku"><i class="zmdi zmdi-format-list-bulleted"></i></a>
+    <a href="<?php echo base_url() ?>bertanya" title="bertanya"><i class="zmdi zmdi-playlist-plus"></i></a>
+    <?php } ?>
+</div> 
     <!-- Footer -->
     <footer>
         <div class="col-md-12 row">

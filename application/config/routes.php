@@ -56,6 +56,9 @@ $route['pertanyaanku'] = 'home/pertanyaanku';
 $route['pertanyaan'] = 'home/pertanyaan';
 $route['pesantren'] = 'home/pesantren';
 $route['newpost'] = "home/newpost";
+$route['postku'] = "home/postku";
+$route['allpost'] = "home/allpost";
+
 
 $route['editpost/(.+)'] = "home/editpost/$1";
 $route['deletepost/(.+)'] = "posting/deletepost/$1";

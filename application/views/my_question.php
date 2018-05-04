@@ -17,19 +17,30 @@
     <div class="container">
       <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
-
+           <?php 
+        if (!empty($this->input->get('keyword'))) {
+            $keyword = $this->input->get('keyword');
+          }else{
+            $keyword = '';
+          }
+        ?>
           <!-- Search Widget -->
+          <form action="<?php echo base_url() ?>pertanyaanku/" method="get">
+                
           <div class="card my-4">
             <h5 class="card-header">Search</h5>
             <div class="card-body">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
+                <input type="text" name="keyword" class="form-control" placeholder="Cari berdasarkan pertanyaan" value="<?php echo $keyword ?>">
                 <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
+                  <button class="btn btn-secondary" type="submit">Go!</button>
                 </span>
+                
               </div>
             </div>
           </div>
+
+                </form>
 
           
 
@@ -83,7 +94,8 @@
           
           <!-- Pager -->
           <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            <?php echo $pagination ?>
+            <!-- <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a> -->
           </div>
         </div>
       </div>

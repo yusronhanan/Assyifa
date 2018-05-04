@@ -93,14 +93,24 @@ class Ask_model extends CI_Model {
         }
 	}
 
-	public function get_myquestion(){
+	public function get_myquestion($limit,$mulai){
 		return $this->db->where('id_questioner',$this->session->userdata('logged_id'))
 						->join('post', 'post.question_id = question.id_question', 'left')
 						->order_by('question.date_question','DESC')
+                        ->limit($limit,$mulai)
 						->get('question')
 						->result();
 	}
-	public function get_question(){
+    public function get_myquestion_where($limit,$mulai,$where){
+        return $this->db->where('id_questioner',$this->session->userdata('logged_id'))
+                        ->where($where)
+                        ->join('post', 'post.question_id = question.id_question', 'left')
+                        ->order_by('question.date_question','DESC')
+                        ->limit($limit,$mulai)
+                        ->get('question')
+                        ->result();
+    }
+	public function get_question($limit,$mulai){
 		return $this->db
 					->select('*, CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner')
 		// , penjawab.full_name as name_answering
@@ -109,9 +119,26 @@ class Ask_model extends CI_Model {
                         // ->join('user as penjawab','question.id_answering = penjawab.id_user')
 						// ->group_by('question.id_question')
 						->order_by('question.status_question','ASC')
+                        ->order_by('question.date_question','DESC')
+                        ->limit($limit,$mulai)
 						->get('question')
 						->result();
 	}
+    public function get_question_where($limit,$mulai,$where){
+        return $this->db
+                    ->select('*, CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner')
+                    ->where($where)
+        // , penjawab.full_name as name_answering
+                        ->join('users as penanya','question.id_questioner = penanya.id_user')
+                        ->join('post', 'post.question_id = question.id_question', 'left')
+                        // ->join('user as penjawab','question.id_answering = penjawab.id_user')
+                        // ->group_by('question.id_question')
+                        ->order_by('question.status_question','ASC')
+                        ->order_by('question.date_question','DESC')
+                        ->limit($limit,$mulai)
+                        ->get('question')
+                        ->result();
+    }
 	public function get_question_for_answer($hash_q){
 		return $this->db
 					->select('*, CONCAT(penanya.first_name, " ", penanya.last_name ) as name_questioner')
